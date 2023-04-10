@@ -7,7 +7,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPooling2D
 from keras.preprocessing.image import ImageDataGenerator
 
-# Step 1: Data Preprocessing
+#  Data Preprocessing
 data = pd.read_csv('styles3.csv')
 label_map = {}
 label_index = 0
@@ -43,7 +43,7 @@ validation_generator = datagen.flow_from_dataframe(
     subset="validation"
 )
 
-# Step 2: Model Development
+# Model Development
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=(224, 224, 3)))
 model.add(MaxPooling2D(pool_size=(2, 2)))
@@ -56,8 +56,5 @@ model.add(Dense(len(label_map), activation='softmax'))
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 model.fit(train_generator, epochs=10, validation_data=validation_generator)
 
-# Step 3: Model Optimization
-# Perform hyperparameter tuning, data augmentation, regularization, etc.
-
-# Step 4: Model Deployment
+# Model Deployment
 model.save('model.h5')
